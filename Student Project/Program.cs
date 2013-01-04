@@ -8,7 +8,6 @@ using System.Text;
 //Student is the class name
 namespace Student_Project
 {
-    
     class Student
     {
         static void Main()
@@ -22,7 +21,6 @@ namespace Student_Project
             numberOfStudents = int.Parse(Console.ReadLine());    // Integer Conversion
 
             //Looping through and getting the students info such as ID for all the studens
-        //For loop
             for (int i = 0; i < numberOfStudents; i++)         // FOR loop
             {
                 Console.WriteLine("---------Enter the student {0} information----------", i + 1);
@@ -191,6 +189,5 @@ namespace Student_Project
             }
             return res;
         }
-
     }
 }
