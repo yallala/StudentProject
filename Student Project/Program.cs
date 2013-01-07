@@ -41,7 +41,7 @@ namespace Student_Project
                 Console.WriteLine("Enter Student 6 subjects Marks:");
 
 
-                int numberOfSubjects = 0;
+                numberOfSubjects = 0;
 
                 //While loop to find out the marks entered by the user is less than 100
                 while (numberOfSubjects < studentMarks.Count)// While loop
