@@ -31,32 +31,23 @@ namespace Student_Project
                 Console.WriteLine("Enter Student Name:");
                 studentName = Console.ReadLine();
 
-                Console.WriteLine("Enter Student 6 subjects Marks:");
+                numberOfSubjects = 6;
 
-
-                numberOfSubjects = 0;
+                Console.WriteLine("Enter 6 subject marks for {0}...", studentName);
 
                 //While loop to find out the marks entered by the user is less than 100
-                while (numberOfSubjects < studentMarks.Count)// While loop
+                while (studentMarks.Count < numberOfSubjects)// While loop
                 {
-                    Console.WriteLine("Subject{0} :", numberOfSubjects + 1);
-                    studentMarks[numberOfSubjects] = int.Parse(Console.ReadLine());
-                    //If user enters more than 100 then reprompt the user to enter less than 100
-                    if (studentMarks[numberOfSubjects] > 100)// If Statement
-                    {
-                        Console.WriteLine(" marks should be less then 100..... Enter again");
-                        studentMarks[numberOfSubjects] = int.Parse(Console.ReadLine());
-                    }
-                    numberOfSubjects++; //post increment operator
+                    Console.WriteLine("Subject {0}...", studentMarks.Count + 1);
+                    studentMarks.Add(st.MakeMyMarksValid());
                 }
-                //We have marks, now we are finding whether student passed or failed....            
-                // Creating a object ("st") and calling the method with that object.             
+                //We have marks, now we are finding whether student passed or failed....                      
                 string r1;
 
                 r1 = st.result(studentMarks[0], studentMarks[1], studentMarks[2], studentMarks[3], studentMarks[4], studentMarks[5]); // Method Calling
                 if (r1 == "PASS")
                 {
-                    Console.WriteLine("Student Passed");
+                    Console.WriteLine("{0} Passed", studentName);
 
                     //finding the total and  percentage
                     int tot = 0;
@@ -129,7 +120,7 @@ namespace Student_Project
 
                 else
                 {
-                    Console.WriteLine("Student Failed");
+                    Console.WriteLine("{0} Failed", studentName);
                     //Since user failed printing the total for their info
                     //Finding the total of all the marks entered by the user. 
 
@@ -143,14 +134,16 @@ namespace Student_Project
 
                 }
 
+                // Clear out the list of student marks
+                studentMarks.Clear();
             }
 
+            Console.WriteLine("Goodbye!");
             Console.ReadLine();
         }
 
         int MakeMyPromptIntoAnInteger(string prompt)
         {
-
             Console.WriteLine(prompt);
             string input = Console.ReadLine();
             int output;
@@ -163,7 +156,22 @@ namespace Student_Project
             }
 
             return output;
+        }
 
+        int MakeMyMarksValid()
+        {
+            int validMark;
+            
+            Student st = new Student();
+
+            validMark = st.MakeMyPromptIntoAnInteger("Enter Mark:");
+            while (validMark > 100)
+            {
+                Console.WriteLine("Student marks must be less than 100");
+                validMark = st.MakeMyPromptIntoAnInteger("Enter Mark:");
+            }
+
+            return validMark;
         }
 
         //Creating the method and returning the results 
