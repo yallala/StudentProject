@@ -16,25 +16,18 @@ namespace Student_Project
             string studentName;     //string  variable Declaration
             var studentMarks = new List<int>();  // Array Declaration with size 6
 
-            //Getting the input from the user about number of students info and storing into integer "a".
-            Console.WriteLine("How many students information you want?");
-            numberOfStudents = int.Parse(Console.ReadLine());    // Integer Conversion
+            Student st = new Student();   // Object creation
+
+            //Getting the input from the user about number of students info and storing into integer.
+            numberOfStudents = st.MakeMyPromptIntoAnInteger("How many students information you want?");
 
             //Looping through and getting the students info such as ID for all the studens
             for (int i = 0; i < numberOfStudents; i++)         // FOR loop
             {
                 Console.WriteLine("---------Enter the student {0} information----------", i + 1);
 
-                Console.WriteLine("Enter Student id:");
-                string input_id = Console.ReadLine();
-
-                // If user enters string accidentally , it won't break if we use TryParse.
-                while (!Int32.TryParse(input_id, out studentId))
-                {
-                    Console.WriteLine("Invalid student id-- please input an integer number.");
-                    input_id = Console.ReadLine();
-                }
-
+                studentId = st.MakeMyPromptIntoAnInteger("Enter Student Id:");
+                                
                 Console.WriteLine("Enter Student Name:");
                 studentName = Console.ReadLine();
 
@@ -59,7 +52,7 @@ namespace Student_Project
                 //We have marks, now we are finding whether student passed or failed....            
                 // Creating a object ("st") and calling the method with that object.             
                 string r1;
-                Student st = new Student();   // Object creation
+
                 r1 = st.result(studentMarks[0], studentMarks[1], studentMarks[2], studentMarks[3], studentMarks[4], studentMarks[5]); // Method Calling
                 if (r1 == "PASS")
                 {
@@ -162,7 +155,7 @@ namespace Student_Project
             string input = Console.ReadLine();
             int output;
 
-            // If user enters string accidentally , it won't break if we use TryParse.
+            // If user enters a string accidentally , it won't break if we use TryParse.
             while (!Int32.TryParse(input, out output))
             {
                 Console.WriteLine("Invalid input, want to try an integer instead? Try again!");
