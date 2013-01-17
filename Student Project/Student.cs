@@ -12,11 +12,9 @@ namespace Student_Project
     {
         static void Main()
         {
-            int studentId, numberOfStudents, numberOfSubjects;        // Integer variable Declaration
+            int studentId, numberOfStudents, numberOfSubjects, inputMark;        // Integer variable Declaration
             string studentName;     //string  variable Declaration
             var studentMarks = new List<int>();  // Array Declaration with size 6
-
-            Student st = new Student();   // Object creation
 
             //Getting the input from the user about number of students info and storing into integer.
             numberOfStudents = MakeMyPromptIntoAnInteger("How many students information you want?");
@@ -39,12 +37,22 @@ namespace Student_Project
                 while (studentMarks.Count < numberOfSubjects)// While loop
                 {
                     Console.WriteLine("Subject {0}...", studentMarks.Count + 1);
-                    studentMarks.Add(MakeMyMarksValid());
+                    inputMark = MakeMyPromptIntoAnInteger("Enter Mark:");
+                    
+                    if (inputMark <= 100)
+                    {
+                        studentMarks.Add(inputMark);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Subject mark must be less than 100");
+                    }
                 }
+
                 //We have marks, now we are finding whether student passed or failed....                      
                 string r1;
 
-                r1 = st.result(studentMarks[0], studentMarks[1], studentMarks[2], studentMarks[3], studentMarks[4], studentMarks[5]); // Method Calling
+                r1 = result(studentMarks[0], studentMarks[1], studentMarks[2], studentMarks[3], studentMarks[4], studentMarks[5]); // Method Calling
                 if (r1 == "PASS")
                 {
                     Console.WriteLine("{0} Passed", studentName);
@@ -158,23 +166,9 @@ namespace Student_Project
             return output;
         }
 
-        static int MakeMyMarksValid()
-        {
-            int validMark;
-
-            validMark = MakeMyPromptIntoAnInteger("Enter Mark:");
-            while (validMark > 100)
-            {
-                Console.WriteLine("Student marks must be less than 100");
-                validMark = MakeMyPromptIntoAnInteger("Enter Mark:");
-            }
-
-            return validMark;
-        }
-
         //Creating the method and returning the results 
         //student failes even if one subject has less than 35
-        string result(int a, int b, int c, int d, int e, int f)    // method Definition
+        static string result(int a, int b, int c, int d, int e, int f)    // method Definition
         {
             string res;
 
