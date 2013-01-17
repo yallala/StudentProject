@@ -19,14 +19,14 @@ namespace Student_Project
             Student st = new Student();   // Object creation
 
             //Getting the input from the user about number of students info and storing into integer.
-            numberOfStudents = st.MakeMyPromptIntoAnInteger("How many students information you want?");
+            numberOfStudents = MakeMyPromptIntoAnInteger("How many students information you want?");
 
             //Looping through and getting the students info such as ID for all the studens
             for (int i = 0; i < numberOfStudents; i++)         // FOR loop
             {
                 Console.WriteLine("---------Enter the student {0} information----------", i + 1);
 
-                studentId = st.MakeMyPromptIntoAnInteger("Enter Student Id:");
+                studentId = MakeMyPromptIntoAnInteger("Enter Student Id:");
                                 
                 Console.WriteLine("Enter Student Name:");
                 studentName = Console.ReadLine();
@@ -39,7 +39,7 @@ namespace Student_Project
                 while (studentMarks.Count < numberOfSubjects)// While loop
                 {
                     Console.WriteLine("Subject {0}...", studentMarks.Count + 1);
-                    studentMarks.Add(st.MakeMyMarksValid());
+                    studentMarks.Add(MakeMyMarksValid());
                 }
                 //We have marks, now we are finding whether student passed or failed....                      
                 string r1;
@@ -142,7 +142,7 @@ namespace Student_Project
             Console.ReadLine();
         }
 
-        int MakeMyPromptIntoAnInteger(string prompt)
+        static int MakeMyPromptIntoAnInteger(string prompt)
         {
             Console.WriteLine(prompt);
             string input = Console.ReadLine();
@@ -158,17 +158,15 @@ namespace Student_Project
             return output;
         }
 
-        int MakeMyMarksValid()
+        static int MakeMyMarksValid()
         {
             int validMark;
-            
-            Student st = new Student();
 
-            validMark = st.MakeMyPromptIntoAnInteger("Enter Mark:");
+            validMark = MakeMyPromptIntoAnInteger("Enter Mark:");
             while (validMark > 100)
             {
                 Console.WriteLine("Student marks must be less than 100");
-                validMark = st.MakeMyPromptIntoAnInteger("Enter Mark:");
+                validMark = MakeMyPromptIntoAnInteger("Enter Mark:");
             }
 
             return validMark;
